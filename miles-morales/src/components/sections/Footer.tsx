@@ -11,12 +11,12 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative py-24 md:py-32 px-6 md:px-12 border-t border-border overflow-hidden"
+      className="relative py-24 md:py-32 px-8 md:px-16 lg:px-24 border-t border-border overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 halftone opacity-[0.02] pointer-events-none" />
 
-      <div className="max-w-[1400px] mx-auto relative z-10">
+      <div className="max-w-[1200px] mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
           {/* Left: brand */}
           <div className="md:col-span-5">

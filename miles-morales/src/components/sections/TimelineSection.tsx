@@ -12,11 +12,11 @@ export default function TimelineSection() {
     <section
       ref={sectionRef}
       id="story"
-      className="relative py-32 md:py-48 px-6 md:px-12 overflow-hidden"
+      className="relative py-32 md:py-48 px-8 md:px-16 lg:px-24 overflow-hidden"
     >
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />
 
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1200px] mx-auto">
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -71,9 +71,7 @@ export default function TimelineSection() {
                     duration: 0.7,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className={`relative pl-20 md:pl-0 md:grid md:grid-cols-2 md:gap-16 items-center ${
-                    isLeft ? "" : "md:direction-rtl"
-                  }`}
+                  className="relative pl-20 md:pl-0 md:grid md:grid-cols-2 md:gap-16 items-center"
                 >
                   {/* Dot on the line */}
                   <div className="absolute left-[26px] md:left-1/2 md:-translate-x-1/2 w-5 h-5 rounded-full border-2 border-spider-red bg-background z-10 flex items-center justify-center">
@@ -105,7 +103,7 @@ export default function TimelineSection() {
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm text-muted leading-relaxed max-w-md">
+                    <p className={`text-sm text-muted leading-relaxed max-w-md ${isLeft ? "md:ml-auto" : ""}`}>
                       {event.description}
                     </p>
                   </div>

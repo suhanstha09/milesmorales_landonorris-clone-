@@ -12,14 +12,14 @@ export default function PowersSection() {
     <section
       ref={sectionRef}
       id="powers"
-      className="relative py-32 md:py-48 px-6 md:px-12 overflow-hidden"
+      className="relative py-32 md:py-48 px-8 md:px-16 lg:px-24 overflow-hidden"
     >
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />
 
       {/* Background accent */}
       <div className="absolute inset-0 web-pattern opacity-30 pointer-events-none" />
 
-      <div className="max-w-[1400px] mx-auto relative z-10">
+      <div className="max-w-[1200px] mx-auto relative z-10">
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}

@@ -253,7 +253,7 @@ export default function HeroSection() {
       <div className="absolute bottom-0 left-0 w-1/4 h-1/4 halftone-cyan opacity-[0.03] pointer-events-none" />
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-6 flex flex-col items-center">
+      <div className="relative z-10 text-center px-8 md:px-16 lg:px-24 flex flex-col items-center">
         {/* Small tag above */}
         <motion.p
           className="hero-subtitle font-mono text-xs md:text-sm tracking-[0.4em] text-spider-red uppercase mb-8"

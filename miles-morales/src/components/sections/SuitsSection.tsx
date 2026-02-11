@@ -15,11 +15,11 @@ export default function SuitsSection() {
     <section
       ref={sectionRef}
       id="suits"
-      className="relative py-32 md:py-48 px-6 md:px-12 overflow-hidden"
+      className="relative py-32 md:py-48 px-8 md:px-16 lg:px-24 overflow-hidden"
     >
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />
 
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1200px] mx-auto">
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
