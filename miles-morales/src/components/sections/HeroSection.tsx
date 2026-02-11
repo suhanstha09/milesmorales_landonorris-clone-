@@ -3,6 +3,7 @@
 import { useRef, useEffect, useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
+import LiquidReveal from "@/components/LiquidReveal";
 
 // ─── Spider-Man Mask SVG Path (simplified Suhan Shrestha mask shape) ──────────
 const MASK_PATH =
@@ -53,12 +54,10 @@ interface Particle {
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const maskImgRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: 0, y: 0, px: 0, py: 0 });
   const particlesRef = useRef<Particle[]>([]);
   const rafRef = useRef<number>(0);
   const [isHovering, setIsHovering] = useState(false);
-  const clipPosRef = useRef({ x: 50, y: 50 });
 
   // ─── Particle System ────────────────────────────────────────────────────
   const spawnParticles = useCallback((x: number, y: number, speed: number) => {
@@ -151,50 +150,22 @@ export default function HeroSection() {
       if (speed > 2) {
         spawnParticles(x, y, speed);
       }
-
-      // Update circular clip position on the mask image container
-      const imgContainer = container.querySelector(".face-mask-wrapper") as HTMLElement;
-      if (imgContainer && maskImgRef.current) {
-        const imgRect = imgContainer.getBoundingClientRect();
-        const relX = ((e.clientX - imgRect.left) / imgRect.width) * 100;
-        const relY = ((e.clientY - imgRect.top) / imgRect.height) * 100;
-        clipPosRef.current = { x: relX, y: relY };
-
-        gsap.to(maskImgRef.current, {
-          clipPath: `circle(18% at ${relX}% ${relY}%)`,
-          duration: 0.4,
-          ease: "power2.out",
-        });
-      }
     },
     [spawnParticles]
   );
-
-  // Close the clip circle when mouse leaves
-  const handleMouseLeave = useCallback(() => {
-    if (maskImgRef.current) {
-      gsap.to(maskImgRef.current, {
-        clipPath: `circle(0% at ${clipPosRef.current.x}% ${clipPosRef.current.y}%)`,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
-    }
-  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     container.addEventListener("mousemove", handleMouseMove);
-    container.addEventListener("mouseleave", handleMouseLeave);
     rafRef.current = requestAnimationFrame(animateParticles);
 
     return () => {
       container.removeEventListener("mousemove", handleMouseMove);
-      container.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [handleMouseMove, handleMouseLeave, animateParticles]);
+  }, [handleMouseMove, animateParticles]);
 
   // ─── GSAP entrance animation ────────────────────────────────────────────
   useEffect(() => {
@@ -282,18 +253,8 @@ export default function HeroSection() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 2.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
             />
-            {/* Face image - revealed through circular clip that follows cursor */}
-            <div
-              ref={maskImgRef}
-              className="absolute inset-0 w-full h-full pointer-events-none select-none bg-background"
-              style={{ clipPath: "circle(0% at 50% 50%)" }}
-            >
-              <img
-                src="/meface.png"
-                alt="Suhan Shrestha"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            {/* Face revealed through liquid organic blob mask */}
+            <LiquidReveal src="/meface.png" alt="Suhan Shrestha" />
           </div>
 
           {/* Title Text */}
