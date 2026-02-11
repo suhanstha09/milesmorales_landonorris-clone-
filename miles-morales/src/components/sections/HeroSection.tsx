@@ -3,6 +3,7 @@
 import { useRef, useEffect, useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
+import LiquidDistortion from "@/components/LiquidDistortion";
 
 // ─── Spider-Man Mask SVG Path (simplified Suhan Shrestha mask shape) ──────────
 const MASK_PATH =
@@ -273,15 +274,21 @@ export default function HeroSection() {
             data-liquid-cursor
             className="face-mask-wrapper absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[380px] md:w-[450px] md:h-[560px] lg:w-[500px] lg:h-[620px] z-20"
           >
-            {/* Mask image - always visible as base layer */}
-            <motion.img
-              src="/milesm.png"
-              alt="Mask"
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+            {/* Mask image with liquid distortion on hover */}
+            <motion.div
+              className="absolute inset-0 w-full h-full"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 2.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            />
+            >
+              <LiquidDistortion
+                src="/milesm.png"
+                alt="Mask"
+                className="w-full h-full"
+                strength={0.18}
+                radius={0.25}
+              />
+            </motion.div>
             {/* Face image - revealed through circular clip that follows cursor */}
             <div
               ref={maskImgRef}
