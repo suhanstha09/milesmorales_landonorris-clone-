@@ -1,26 +1,216 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ── Custom Theme ─────────────────────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: #050505;
+  --color-foreground: #f5f5f5;
+  --color-spider-red: #e11d48;
+  --color-spider-red-dark: #9f1239;
+  --color-spider-cyan: #06b6d4;
+  --color-spider-purple: #a855f7;
+  --color-spider-blue: #3b82f6;
+  --color-spider-yellow: #f59e0b;
+  --color-surface: #0a0a0a;
+  --color-surface-elevated: #141414;
+  --color-surface-hover: #1a1a1a;
+  --color-muted: #737373;
+  --color-border: #262626;
+
+  --font-display: "Bebas Neue", "Impact", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base Styles ──────────────────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  overflow-x: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-spider-red);
+  color: white;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-spider-red);
+  border-radius: 3px;
+}
+
+/* ── Halftone Pattern ─────────────────────────────────────────────────────── */
+.halftone {
+  background-image: radial-gradient(circle, var(--color-spider-red) 0.6px, transparent 0.6px);
+  background-size: 8px 8px;
+}
+
+.halftone-cyan {
+  background-image: radial-gradient(circle, var(--color-spider-cyan) 0.5px, transparent 0.5px);
+  background-size: 6px 6px;
+}
+
+/* ── Comic Panel Border ───────────────────────────────────────────────────── */
+.comic-border {
+  border: 3px solid var(--color-foreground);
+  box-shadow:
+    4px 4px 0 var(--color-spider-red),
+    -1px -1px 0 var(--color-foreground);
+}
+
+/* ── Glitch Effect ────────────────────────────────────────────────────────── */
+@keyframes glitch1 {
+  0%, 100% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
+  25% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -2px); }
+  50% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 1px); }
+  75% { clip-path: inset(40% 0 30% 0); transform: translate(1px, -1px); }
+}
+
+@keyframes glitch2 {
+  0%, 100% { clip-path: inset(70% 0 5% 0); transform: translate(2px, -2px); }
+  25% { clip-path: inset(5% 0 80% 0); transform: translate(-2px, 2px); }
+  50% { clip-path: inset(50% 0 20% 0); transform: translate(1px, -1px); }
+  75% { clip-path: inset(15% 0 55% 0); transform: translate(-1px, 1px); }
+}
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.glitch-text:hover::before {
+  opacity: 0.8;
+  color: var(--color-spider-cyan);
+  animation: glitch1 0.3s ease-in-out infinite;
+}
+
+.glitch-text:hover::after {
+  opacity: 0.8;
+  color: var(--color-spider-red);
+  animation: glitch2 0.3s ease-in-out infinite;
+}
+
+/* ── Noise Overlay ────────────────────────────────────────────────────────── */
+.noise-overlay::after {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ── Gradient Text ────────────────────────────────────────────────────────── */
+.gradient-text-red {
+  background: linear-gradient(135deg, #e11d48, #f43f5e, #fb7185);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #06b6d4, #22d3ee, #67e8f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-multi {
+  background: linear-gradient(135deg, #e11d48, #a855f7, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animated Border ──────────────────────────────────────────────────────── */
+@keyframes border-dance {
+  0% { background-position: 0 0, 100% 100%, 0 100%, 100% 0; }
+  100% { background-position: 100% 0, 0 100%, 0 0, 100% 100%; }
+}
+
+.animated-border {
+  background-image:
+    linear-gradient(90deg, var(--color-spider-red) 50%, transparent 50%),
+    linear-gradient(90deg, var(--color-spider-red) 50%, transparent 50%),
+    linear-gradient(0deg, var(--color-spider-red) 50%, transparent 50%),
+    linear-gradient(0deg, var(--color-spider-red) 50%, transparent 50%);
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: 12px 2px, 12px 2px, 2px 12px, 2px 12px;
+  background-position: 0 0, 100% 100%, 0 100%, 100% 0;
+  animation: border-dance 1s infinite linear;
+}
+
+/* ── Mask Reveal Glow ─────────────────────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(225, 29, 72, 0.5)); }
+  50% { filter: drop-shadow(0 0 40px rgba(225, 29, 72, 0.8)); }
+}
+
+/* ── Web Pattern ──────────────────────────────────────────────────────────── */
+.web-pattern {
+  background-image:
+    repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      transparent 0deg,
+      rgba(225, 29, 72, 0.03) 1deg,
+      transparent 2deg
+    );
+}
+
+/* ── Stagger Children ─────────────────────────────────────────────────────── */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.stagger-children.revealed > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-children.revealed > *:nth-child(2) { transition-delay: 100ms; }
+.stagger-children.revealed > *:nth-child(3) { transition-delay: 200ms; }
+.stagger-children.revealed > *:nth-child(4) { transition-delay: 300ms; }
+.stagger-children.revealed > *:nth-child(5) { transition-delay: 400ms; }
+.stagger-children.revealed > *:nth-child(6) { transition-delay: 500ms; }
+
+.stagger-children.revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
