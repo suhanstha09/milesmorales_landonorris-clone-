@@ -203,21 +203,21 @@ export const mediaItems: MediaItem[] = [
     title: "Leap of Faith",
     category: "Iconic Moments",
     aspect: "wide",
-    image: "/leap-of-faith.jpg",
+    image: "/leapofaith.jpg",
   },
   {
     id: "m2",
     title: "What's Up Danger",
     category: "Soundtrack",
     aspect: "tall",
-    image: "/whats-up-danger.jpg",
+    image: "/whatsupdanger.png",
   },
   {
     id: "m3",
     title: "Brooklyn Visions",
     category: "Locations",
     aspect: "square",
-    image: "/brooklyn.jpg",
+    image: "/brooklynvisions.jpg",
   },
   {
     id: "m4",
@@ -231,14 +231,14 @@ export const mediaItems: MediaItem[] = [
     title: "Gwen Stacy",
     category: "Allies",
     aspect: "tall",
-    image: "/gwen.jpg",
+    image: "/gwenstacy.jpg",
   },
   {
     id: "m6",
     title: "Spider-Society",
     category: "Multiverse",
     aspect: "square",
-    image: "/spider-society.jpg",
+    image: "/spidersociety.jpg",
   },
 ];
 

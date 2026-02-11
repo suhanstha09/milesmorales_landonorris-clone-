@@ -270,7 +270,7 @@ export default function HeroSection() {
         <div className="relative">
           {/* Face / Mask wrapper */}
           <div
-            className="face-mask-wrapper absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[380px] md:w-[450px] md:h-[560px] lg:w-[500px] lg:h-[620px]"
+            className="face-mask-wrapper absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[380px] md:w-[450px] md:h-[560px] lg:w-[500px] lg:h-[620px] z-20"
           >
             {/* Mask image - always visible as base layer */}
             <motion.img

@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     "Earth-1610",
     "Brooklyn",
   ],
+  icons: {
+    icon: "/logomm.png",
+  },
 };
 
 export default function RootLayout({

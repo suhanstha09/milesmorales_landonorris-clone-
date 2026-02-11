@@ -58,29 +58,20 @@ export default function Preloader() {
             </svg>
           </div>
 
-          {/* Spider icon */}
+          {/* Logo icon */}
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="mb-8"
           >
-            <svg
-              width="60"
-              height="60"
-              viewBox="0 0 100 100"
-              className="text-spider-red"
-            >
-              <path
-                fill="currentColor"
-                d="M50 15 C50 15, 35 25, 35 40 C35 55, 45 60, 50 65 C55 60, 65 55, 65 40 C65 25, 50 15, 50 15Z M30 35 L10 20 M30 45 L5 45 M30 55 L10 70 M70 35 L90 20 M70 45 L95 45 M70 55 L90 70"
-                strokeWidth="3"
-                stroke="currentColor"
-                fillOpacity="0.8"
-              />
-              <circle cx="42" cy="38" r="5" fill="#050505" />
-              <circle cx="58" cy="38" r="5" fill="#050505" />
-            </svg>
+            <img
+              src="/logomm.png"
+              alt="Logo"
+              width={120}
+              height={120}
+              className="w-[120px] h-[120px] object-contain"
+            />
           </motion.div>
 
           {/* Text */}

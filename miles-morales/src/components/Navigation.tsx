@@ -52,10 +52,8 @@ export default function Navigation() {
             href="#"
             className="relative z-[110] flex items-center gap-3 group"
           >
-            <div className="w-10 h-10 rounded-full border-2 border-spider-red flex items-center justify-center group-hover:bg-spider-red transition-colors duration-300">
-              <span className="font-display text-lg text-spider-red group-hover:text-white transition-colors duration-300">
-                SS
-              </span>
+            <div className="w-14 h-14 rounded-full border-2 border-spider-red flex items-center justify-center group-hover:bg-spider-red transition-colors duration-300 overflow-hidden">
+              <img src="/logomm.png" alt="Logo" className="w-14 h-14 object-contain" />
             </div>
             <span className="hidden md:block font-display text-xl tracking-wider">
               Suhan Shrestha
