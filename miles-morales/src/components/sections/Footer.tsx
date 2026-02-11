@@ -31,7 +31,7 @@ export default function Footer() {
                 <span className="text-spider-red">SHRESTHA</span>
               </h2>
               <p className="mt-6 text-sm text-muted max-w-xs leading-relaxed">
-                Anyone can wear the mask — but there&apos;s only one Suhan Shrestha.
+                Anyone can wear the mask  but there&apos;s only one Suhan Shrestha.
                 Brooklyn&apos;s one and only Spider-Man.
               </p>
             </motion.div>
