@@ -113,6 +113,7 @@ export default function SuitsSection() {
               >
                 {/* Suit visual */}
                 <div
+                  data-liquid-cursor
                   className="relative w-full aspect-[3/4] border border-border overflow-hidden"
                   style={{
                     background: `linear-gradient(135deg, ${suit.color}, ${suit.color}dd, #0a0a0a)`,
