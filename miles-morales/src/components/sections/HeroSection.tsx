@@ -284,7 +284,7 @@ export default function HeroSection() {
             {/* Face image - revealed through circular clip that follows cursor */}
             <div
               ref={maskImgRef}
-              className="absolute inset-0 w-full h-full pointer-events-none select-none"
+              className="absolute inset-0 w-full h-full pointer-events-none select-none bg-background"
               style={{ clipPath: "circle(0% at 50% 50%)" }}
             >
               <img
