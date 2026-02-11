@@ -201,6 +201,7 @@ export default function LiquidReveal({
           href={src}
           width={VW}
           height={VH}
+          y={-100}
           preserveAspectRatio="xMidYMid slice"
         />
       </g>

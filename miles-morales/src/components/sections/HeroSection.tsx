@@ -243,18 +243,23 @@ export default function HeroSection() {
           <div
             data-liquid-cursor
             className="face-mask-wrapper absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[380px] md:w-[450px] md:h-[560px] lg:w-[500px] lg:h-[620px] z-20"
+            onContextMenu={(e) => e.preventDefault()}
           >
             {/* Mask image - always visible as base layer */}
             <motion.img
               src="/milesm.png"
               alt="Mask"
               className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+              draggable={false}
+              onContextMenu={(e) => e.preventDefault()}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 2.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
             />
             {/* Face revealed through liquid organic blob mask */}
             <LiquidReveal src="/meface.png" alt="Suhan Shrestha" />
+            {/* Transparent overlay to block save-image on right-click */}
+            <div className="absolute inset-0 z-30" onContextMenu={(e) => e.preventDefault()} />
           </div>
 
           {/* Title Text */}
