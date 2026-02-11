@@ -7,6 +7,7 @@ export interface Suit {
   description: string;
   color: string;
   accentColor: string;
+  image: string;
 }
 
 export interface Power {
@@ -30,6 +31,7 @@ export interface MediaItem {
   title: string;
   category: string;
   aspect: "wide" | "tall" | "square";
+  image: string;
 }
 
 export const suits: Suit[] = [
@@ -41,6 +43,7 @@ export const suits: Suit[] = [
       "The original black and red suit. Designed by Suhan himself using spray paint and DIY materials. Raw, street-level, iconic.",
     color: "#0a0a0a",
     accentColor: "#e11d48",
+    image: "/classicsuit.jpg",
   },
   {
     id: "itsv",
@@ -50,6 +53,7 @@ export const suits: Suit[] = [
       "The animated masterpiece suit with hand-drawn line work and halftone shading. A living comic book made real.",
     color: "#0f0f0f",
     accentColor: "#06b6d4",
+    image: "/across.jpg",
   },
   {
     id: "programmable",
@@ -59,6 +63,7 @@ export const suits: Suit[] = [
       "Advanced nanotech suit with programmable matter. Shape-shifting capabilities with full HUD integration and AI assist.",
     color: "#1a0a2e",
     accentColor: "#a855f7",
+    image: "/programmable.jpg",
   },
   {
     id: "2099",
@@ -68,6 +73,7 @@ export const suits: Suit[] = [
       'Futuristic upgrade inspired by Miguel O\'Hara. Talons, anti-gravity cape, and accelerated vision built for "Nueva York."',
     color: "#0a1628",
     accentColor: "#3b82f6",
+    image: "/2099.jpg",
   },
   {
     id: "bodega",
@@ -77,6 +83,7 @@ export const suits: Suit[] = [
       "A fan-favorite variant featuring a bodega cat companion. Brooklyn charm meets spider-powered vigilantism. Purrfect.",
     color: "#1c1917",
     accentColor: "#f59e0b",
+    image: "/cat.jpg",
   },
 ];
 
@@ -196,36 +203,42 @@ export const mediaItems: MediaItem[] = [
     title: "Leap of Faith",
     category: "Iconic Moments",
     aspect: "wide",
+    image: "/leap-of-faith.jpg",
   },
   {
     id: "m2",
     title: "What's Up Danger",
     category: "Soundtrack",
     aspect: "tall",
+    image: "/whats-up-danger.jpg",
   },
   {
     id: "m3",
     title: "Brooklyn Visions",
     category: "Locations",
     aspect: "square",
+    image: "/brooklyn.jpg",
   },
   {
     id: "m4",
     title: "The Prowler",
     category: "Villains",
     aspect: "wide",
+    image: "/prowler.jpg",
   },
   {
     id: "m5",
     title: "Gwen Stacy",
     category: "Allies",
     aspect: "tall",
+    image: "/gwen.jpg",
   },
   {
     id: "m6",
     title: "Spider-Society",
     category: "Multiverse",
     aspect: "square",
+    image: "/spider-society.jpg",
   },
 ];
 

@@ -81,21 +81,19 @@ export default function MediaSection() {
                   background: `linear-gradient(135deg, ${color}08, ${color}03, #0a0a0a)`,
                 }}
               >
+                {/* Background image */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80 z-10" />
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
                   style={{
-                    background: `linear-gradient(135deg, ${color}15, transparent)`,
-                  }}
-                />
-
-                {/* Pattern inside */}
-                <div
-                  className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500"
-                  style={{
-                    backgroundImage: `radial-gradient(circle, ${color} 0.5px, transparent 0.5px)`,
-                    backgroundSize: "8px 8px",
+                    background: `linear-gradient(135deg, ${color}30, transparent)`,
                   }}
                 />
 

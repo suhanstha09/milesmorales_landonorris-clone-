@@ -111,82 +111,26 @@ export default function SuitsSection() {
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="relative"
               >
-                {/* Suit visual (abstract representation) */}
+                {/* Suit visual */}
                 <div
-                  className="relative w-full aspect-[4/3] border border-border overflow-hidden"
+                  className="relative w-full aspect-[3/4] border border-border overflow-hidden"
                   style={{
                     background: `linear-gradient(135deg, ${suit.color}, ${suit.color}dd, #0a0a0a)`,
                   }}
                 >
-                  {/* Inner pattern - web design */}
-                  <svg
-                    className="absolute inset-0 w-full h-full opacity-20"
-                    viewBox="0 0 400 300"
-                  >
-                    {/* Radial web from center */}
-                    {[...Array(16)].map((_, i) => (
-                      <line
-                        key={i}
-                        x1="200"
-                        y1="150"
-                        x2={200 + 300 * Math.cos((i * Math.PI * 2) / 16)}
-                        y2={150 + 300 * Math.sin((i * Math.PI * 2) / 16)}
-                        stroke={suit.accentColor}
-                        strokeWidth="0.5"
-                      />
-                    ))}
-                    {[...Array(6)].map((_, i) => (
-                      <circle
-                        key={i}
-                        cx="200"
-                        cy="150"
-                        r={30 + i * 30}
-                        fill="none"
-                        stroke={suit.accentColor}
-                        strokeWidth="0.3"
-                      />
-                    ))}
-                  </svg>
-
-                  {/* Halftone overlay */}
-                  <div
-                    className="absolute inset-0 opacity-10"
-                    style={{
-                      backgroundImage: `radial-gradient(circle, ${suit.accentColor} 0.5px, transparent 0.5px)`,
-                      backgroundSize: "6px 6px",
-                    }}
+                  {/* Suit image */}
+                  <img
+                    src={suit.image}
+                    alt={suit.name}
+                    className="absolute inset-0 w-full h-full object-cover object-top"
                   />
+
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
 
                   {/* Big suit number */}
                   <div className="absolute bottom-6 right-8 font-display text-[12rem] leading-none opacity-5 text-foreground select-none pointer-events-none">
                     0{activeSuit + 1}
-                  </div>
-
-                  {/* Suit icon in center */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <motion.div
-                      className="w-32 h-32 md:w-48 md:h-48 rounded-full border-2 flex items-center justify-center"
-                      style={{ borderColor: suit.accentColor }}
-                      animate={{ rotate: 360 }}
-                      transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    >
-                      <svg
-                        viewBox="0 0 100 100"
-                        className="w-16 h-16 md:w-24 md:h-24"
-                      >
-                        <path
-                          d="M50 10 C50 10, 30 25, 30 45 C30 60, 45 70, 50 75 C55 70, 70 60, 70 45 C70 25, 50 10, 50 10Z"
-                          fill={suit.accentColor}
-                          opacity="0.8"
-                        />
-                        <circle cx="42" cy="40" r="6" fill={suit.color} />
-                        <circle cx="58" cy="40" r="6" fill={suit.color} />
-                      </svg>
-                    </motion.div>
                   </div>
 
                   {/* Corner accents */}
