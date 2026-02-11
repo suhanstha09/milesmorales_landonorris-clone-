@@ -26,12 +26,12 @@ export default function Footer() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="font-display text-6xl md:text-8xl tracking-tight leading-none">
-                MILES
+                SUHAN
                 <br />
-                <span className="text-spider-red">MORALES</span>
+                <span className="text-spider-red">SHRESTHA</span>
               </h2>
               <p className="mt-6 text-sm text-muted max-w-xs leading-relaxed">
-                Anyone can wear the mask — but there&apos;s only one Miles Morales.
+                Anyone can wear the mask — but there&apos;s only one Suhan Shrestha.
                 Brooklyn&apos;s one and only Spider-Man.
               </p>
             </motion.div>
@@ -109,7 +109,7 @@ export default function Footer() {
           className="mt-20 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4"
         >
           <p className="font-mono text-[10px] tracking-[0.2em] text-muted/40 uppercase">
-            © 2026 Miles Morales. All Dimensions Reserved.
+            © 2026 Suhan Shrestha. All Dimensions Reserved.
           </p>
           <p className="font-mono text-[10px] tracking-[0.2em] text-muted/40 uppercase">
             Built with 🕷 in Brooklyn

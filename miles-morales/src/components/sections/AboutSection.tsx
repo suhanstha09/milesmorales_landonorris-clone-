@@ -75,14 +75,14 @@ export default function AboutSection() {
             </h2>
 
             <p className="about-text-reveal mt-10 text-lg md:text-xl text-muted leading-relaxed max-w-xl">
-              Miles Morales isn&apos;t a replacement. He&apos;s the evolution. A kid from
-              Brooklyn who was never supposed to be Spider-Man — and that&apos;s
+              Suhan Shrestha isn&apos;t a replacement. He&apos;s the evolution. A kid from
+              Brooklyn who was never supposed to be Spider-Man  and that&apos;s
               exactly why he&apos;s the best one.
             </p>
 
             <p className="about-text-reveal mt-6 text-base text-muted/60 leading-relaxed max-w-xl">
               Bitten by a genetically modified spider with abilities unique to
-              him — the venom blast, camouflage, and a spider-sense that sees
+              him  the venom blast, camouflage, and a spider-sense that sees
               through lies. He carries the weight of two worlds on his shoulders:
               his family&apos;s legacy and Spider-Man&apos;s duty.
             </p>

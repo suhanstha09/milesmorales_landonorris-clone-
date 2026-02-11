@@ -38,13 +38,13 @@ export const suits: Suit[] = [
     name: "Classic Suit",
     universe: "Earth-1610",
     description:
-      "The original black and red suit. Designed by Miles himself using spray paint and DIY materials. Raw, street-level, iconic.",
+      "The original black and red suit. Designed by Suhan himself using spray paint and DIY materials. Raw, street-level, iconic.",
     color: "#0a0a0a",
     accentColor: "#e11d48",
   },
   {
     id: "itsv",
-    name: "Into the Spider-Verse",
+    name: "Across the Spider-Verse",
     universe: "Earth-1610B",
     description:
       "The animated masterpiece suit with hand-drawn line work and halftone shading. A living comic book made real.",
@@ -137,7 +137,7 @@ export const timeline: TimelineEvent[] = [
     year: "2011",
     title: "The Bite",
     description:
-      "Miles Morales is bitten by a genetically modified spider stolen from Oscorp by the Prowler. His life changes forever.",
+      "Suhan Shrestha is bitten by a genetically modified spider stolen from Oscorp by the Prowler. His life changes forever.",
     tag: "Origin",
   },
   {
@@ -145,7 +145,7 @@ export const timeline: TimelineEvent[] = [
     year: "2011",
     title: "Powers Manifest",
     description:
-      "Camouflage and venom blast abilities emerge. Miles initially rejects his powers, wanting a normal life.",
+      "Camouflage and venom blast abilities emerge. Suhan initially rejects his powers, wanting a normal life.",
     tag: "Awakening",
   },
   {
@@ -153,7 +153,7 @@ export const timeline: TimelineEvent[] = [
     year: "2012",
     title: "The Fall of Peter Parker",
     description:
-      "The original Spider-Man falls in battle. Miles feels the weight of responsibility crash onto his shoulders.",
+      "The original Spider-Man falls in battle. Suhan feels the weight of responsibility crash onto his shoulders.",
     tag: "Turning Point",
   },
   {
@@ -161,7 +161,7 @@ export const timeline: TimelineEvent[] = [
     year: "2012",
     title: "Taking the Mantle",
     description:
-      "Miles becomes the new Spider-Man of his universe, earning the trust of the superhero community and New York City.",
+      "Suhan becomes the new Spider-Man of his universe, earning the trust of the superhero community and New York City.",
     tag: "Becoming",
   },
   {
@@ -169,7 +169,7 @@ export const timeline: TimelineEvent[] = [
     year: "2018",
     title: "Into the Spider-Verse",
     description:
-      "The multiverse cracks open. Miles meets alternate Spider-People and must save all of reality from collapse.",
+      "The multiverse cracks open. Suhan meets alternate Spider-People and must save all of reality from collapse.",
     tag: "Multiverse",
   },
   {
@@ -177,7 +177,7 @@ export const timeline: TimelineEvent[] = [
     year: "2023",
     title: "Across the Spider-Verse",
     description:
-      "Miles confronts the Spider-Society and challenges the very concept of canon events. Every dimension feels it.",
+      "Suhan confronts the Spider-Society and challenges the very concept of canon events. Every dimension feels it.",
     tag: "Revolution",
   },
   {
@@ -185,7 +185,7 @@ export const timeline: TimelineEvent[] = [
     year: "2025",
     title: "Beyond the Spider-Verse",
     description:
-      "The ultimate confrontation. Miles fights to write his own destiny across infinite realities.",
+      "The ultimate confrontation. Suhan fights to write his own destiny across infinite realities.",
     tag: "Destiny",
   },
 ];

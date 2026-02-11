@@ -54,11 +54,11 @@ export default function Navigation() {
           >
             <div className="w-10 h-10 rounded-full border-2 border-spider-red flex items-center justify-center group-hover:bg-spider-red transition-colors duration-300">
               <span className="font-display text-lg text-spider-red group-hover:text-white transition-colors duration-300">
-                MM
+                SS
               </span>
             </div>
             <span className="hidden md:block font-display text-xl tracking-wider">
-              MILES MORALES
+              Suhan Shrestha
             </span>
           </a>
 

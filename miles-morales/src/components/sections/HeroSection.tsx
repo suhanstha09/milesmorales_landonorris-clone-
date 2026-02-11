@@ -4,7 +4,7 @@ import { useRef, useEffect, useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 
-// ─── Spider-Man Mask SVG Path (simplified Miles Morales mask shape) ──────────
+// ─── Spider-Man Mask SVG Path (simplified Suhan Shrestha mask shape) ──────────
 const MASK_PATH =
   "M250,30 C180,30 120,70 90,130 C60,190 50,260 60,320 C70,380 100,430 140,460 C170,480 200,500 250,510 C300,500 330,480 360,460 C400,430 430,380 440,320 C450,260 440,190 410,130 C380,70 320,30 250,30Z";
 
@@ -53,11 +53,12 @@ interface Particle {
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const maskGroupRef = useRef<SVGGElement>(null);
+  const maskImgRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: 0, y: 0, px: 0, py: 0 });
   const particlesRef = useRef<Particle[]>([]);
   const rafRef = useRef<number>(0);
   const [isHovering, setIsHovering] = useState(false);
+  const clipPosRef = useRef({ x: 50, y: 50 });
 
   // ─── Particle System ────────────────────────────────────────────────────
   const spawnParticles = useCallback((x: number, y: number, speed: number) => {
@@ -129,7 +130,7 @@ export default function HeroSection() {
     rafRef.current = requestAnimationFrame(animateParticles);
   }, []);
 
-  // ─── Mouse Tracking + Mask 3D Tilt ─────────────────────────────────────
+  // ─── Mouse Tracking + Clip Reveal ───────────────────────────────────────
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
       const container = containerRef.current;
@@ -138,8 +139,6 @@ export default function HeroSection() {
       const rect = container.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
 
       // Speed for particle density
       const dx = x - mouseRef.current.px;
@@ -153,27 +152,17 @@ export default function HeroSection() {
         spawnParticles(x, y, speed);
       }
 
-      // 3D tilt for the mask
-      const rotateX = ((y - centerY) / centerY) * -15;
-      const rotateY = ((x - centerX) / centerX) * 15;
+      // Update circular clip position on the mask image container
+      const imgContainer = container.querySelector(".face-mask-wrapper") as HTMLElement;
+      if (imgContainer && maskImgRef.current) {
+        const imgRect = imgContainer.getBoundingClientRect();
+        const relX = ((e.clientX - imgRect.left) / imgRect.width) * 100;
+        const relY = ((e.clientY - imgRect.top) / imgRect.height) * 100;
+        clipPosRef.current = { x: relX, y: relY };
 
-      if (maskGroupRef.current) {
-        gsap.to(maskGroupRef.current, {
-          attr: {
-            transform: `translate(${(x - centerX) * 0.02}, ${(y - centerY) * 0.02})`,
-          },
-          duration: 0.5,
-          ease: "power2.out",
-        });
-      }
-
-      // Tilt the whole SVG container
-      const svgContainer = container.querySelector(".mask-container") as HTMLElement;
-      if (svgContainer) {
-        gsap.to(svgContainer, {
-          rotateX,
-          rotateY,
-          duration: 0.5,
+        gsap.to(maskImgRef.current, {
+          clipPath: `circle(18% at ${relX}% ${relY}%)`,
+          duration: 0.4,
           ease: "power2.out",
         });
       }
@@ -181,18 +170,31 @@ export default function HeroSection() {
     [spawnParticles]
   );
 
+  // Close the clip circle when mouse leaves
+  const handleMouseLeave = useCallback(() => {
+    if (maskImgRef.current) {
+      gsap.to(maskImgRef.current, {
+        clipPath: `circle(0% at ${clipPosRef.current.x}% ${clipPosRef.current.y}%)`,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
+    }
+  }, []);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     container.addEventListener("mousemove", handleMouseMove);
+    container.addEventListener("mouseleave", handleMouseLeave);
     rafRef.current = requestAnimationFrame(animateParticles);
 
     return () => {
       container.removeEventListener("mousemove", handleMouseMove);
+      container.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [handleMouseMove, animateParticles]);
+  }, [handleMouseMove, handleMouseLeave, animateParticles]);
 
   // ─── GSAP entrance animation ────────────────────────────────────────────
   useEffect(() => {
@@ -264,214 +266,43 @@ export default function HeroSection() {
           Earth-1610 &mdash; Brooklyn, New York
         </motion.p>
 
-        {/* MASK + TITLE Container */}
+        {/* FACE + MASK Lando-style Reveal */}
         <div className="relative">
-          {/* SVG Mask - positioned behind the text, revealed on hover */}
+          {/* Face / Mask wrapper */}
           <div
-            className="mask-container absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[380px] md:w-[450px] md:h-[560px] lg:w-[500px] lg:h-[620px]"
-            style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
+            className="face-mask-wrapper absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[380px] md:w-[450px] md:h-[560px] lg:w-[500px] lg:h-[620px]"
           >
-            <motion.svg
-              viewBox="0 0 500 540"
-              className="w-full h-full"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{
-                opacity: isHovering ? 1 : 0.15,
-                scale: isHovering ? 1 : 0.9,
-              }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            {/* Mask image - always visible as base layer */}
+            <motion.img
+              src="/milesm.png"
+              alt="Mask"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 2.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            />
+            {/* Face image - revealed through circular clip that follows cursor */}
+            <div
+              ref={maskImgRef}
+              className="absolute inset-0 w-full h-full pointer-events-none select-none"
+              style={{ clipPath: "circle(0% at 50% 50%)" }}
             >
-              <defs>
-                {/* Mask clip */}
-                <clipPath id="mask-clip">
-                  <path d={MASK_PATH} />
-                </clipPath>
-
-                {/* Animated gradient for mask fill */}
-                <linearGradient
-                  id="mask-gradient"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="100%"
-                >
-                  <stop offset="0%" stopColor="#0a0a0a" />
-                  <stop offset="50%" stopColor="#1a0a0a" />
-                  <stop offset="100%" stopColor="#0a0a0a" />
-                </linearGradient>
-
-                {/* NYC skyline pattern for inside mask */}
-                <pattern
-                  id="city-pattern"
-                  x="0"
-                  y="0"
-                  width="500"
-                  height="540"
-                  patternUnits="userSpaceOnUse"
-                >
-                  <rect width="500" height="540" fill="#0a0a0a" />
-                  {/* Simplified skyline */}
-                  <rect x="20" y="350" width="30" height="190" fill="#141414" />
-                  <rect x="60" y="280" width="25" height="260" fill="#0f0f0f" />
-                  <rect x="95" y="320" width="35" height="220" fill="#121212" />
-                  <rect x="140" y="250" width="20" height="290" fill="#0e0e0e" />
-                  <rect x="170" y="300" width="40" height="240" fill="#111111" />
-                  <rect x="220" y="220" width="30" height="320" fill="#0d0d0d" />
-                  <rect x="260" y="270" width="25" height="270" fill="#131313" />
-                  <rect x="295" y="200" width="35" height="340" fill="#0f0f0f" />
-                  <rect x="340" y="260" width="20" height="280" fill="#101010" />
-                  <rect x="370" y="290" width="40" height="250" fill="#121212" />
-                  <rect x="420" y="240" width="30" height="300" fill="#0e0e0e" />
-                  <rect x="460" y="310" width="25" height="230" fill="#111111" />
-                  {/* Stars / lights */}
-                  {[
-                    [40, 360], [75, 300], [110, 340], [155, 270], [195, 320],
-                    [240, 240], [275, 290], [315, 220], [355, 280], [395, 310],
-                    [440, 260], [475, 330], [55, 380], [135, 365], [230, 340],
-                    [310, 280], [390, 350], [170, 310], [280, 300], [350, 270],
-                  ].map(([cx, cy], i) => (
-                    <rect
-                      key={i}
-                      x={cx}
-                      y={cy}
-                      width="3"
-                      height="3"
-                      fill={i % 3 === 0 ? "#e11d48" : i % 3 === 1 ? "#06b6d4" : "#f59e0b"}
-                      opacity="0.6"
-                    />
-                  ))}
-                </pattern>
-
-                {/* Glow filter */}
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                  <feMerge>
-                    <feMergeNode in="coloredBlur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-
-                <filter id="glow-strong">
-                  <feGaussianBlur stdDeviation="6" result="coloredBlur" />
-                  <feMerge>
-                    <feMergeNode in="coloredBlur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-
-              <g ref={maskGroupRef}>
-                {/* Mask shape with city inside */}
-                <g clipPath="url(#mask-clip)">
-                  <rect width="500" height="540" fill="url(#city-pattern)" />
-
-                  {/* Red tint overlay */}
-                  <rect
-                    width="500"
-                    height="540"
-                    fill="#e11d48"
-                    opacity="0.08"
-                  />
-
-                  {/* Halftone dots overlay inside mask */}
-                  {[...Array(200)].map((_, i) => (
-                    <circle
-                      key={`dot-${i}`}
-                      cx={Math.random() * 500}
-                      cy={Math.random() * 540}
-                      r={0.5 + Math.random() * 1.5}
-                      fill="#e11d48"
-                      opacity={0.05 + Math.random() * 0.1}
-                    />
-                  ))}
-                </g>
-
-                {/* Web lines on mask */}
-                {WEB_LINES.map((d, i) => (
-                  <path
-                    key={`web-${i}`}
-                    d={d}
-                    stroke="#e11d48"
-                    strokeWidth="0.8"
-                    fill="none"
-                    opacity={isHovering ? 0.4 : 0.1}
-                    clipPath="url(#mask-clip)"
-                    style={{
-                      transition: "opacity 0.5s ease",
-                    }}
-                  />
-                ))}
-
-                {/* Web rings */}
-                {WEB_RINGS.map((d, i) => (
-                  <path
-                    key={`ring-${i}`}
-                    d={d}
-                    stroke="#e11d48"
-                    strokeWidth="0.6"
-                    fill="none"
-                    opacity={isHovering ? 0.3 : 0.1}
-                    clipPath="url(#mask-clip)"
-                    style={{ transition: "opacity 0.5s ease" }}
-                  />
-                ))}
-
-                {/* Mask outline */}
-                <path
-                  d={MASK_PATH}
-                  fill="none"
-                  stroke="#e11d48"
-                  strokeWidth="2"
-                  filter="url(#glow)"
-                  opacity={isHovering ? 0.9 : 0.3}
-                  style={{ transition: "opacity 0.5s ease" }}
-                />
-
-                {/* Eyes */}
-                <path
-                  d={LEFT_EYE}
-                  fill="white"
-                  filter="url(#glow-strong)"
-                  opacity={isHovering ? 1 : 0.4}
-                  style={{ transition: "opacity 0.3s ease" }}
-                />
-                <path
-                  d={RIGHT_EYE}
-                  fill="white"
-                  filter="url(#glow-strong)"
-                  opacity={isHovering ? 1 : 0.4}
-                  style={{ transition: "opacity 0.3s ease" }}
-                />
-
-                {/* Inner eye shapes (pupils) */}
-                <path
-                  d={LEFT_EYE}
-                  fill="none"
-                  stroke="#e11d48"
-                  strokeWidth="1.5"
-                  opacity={isHovering ? 0.8 : 0.2}
-                  style={{ transition: "opacity 0.3s ease" }}
-                />
-                <path
-                  d={RIGHT_EYE}
-                  fill="none"
-                  stroke="#e11d48"
-                  strokeWidth="1.5"
-                  opacity={isHovering ? 0.8 : 0.2}
-                  style={{ transition: "opacity 0.3s ease" }}
-                />
-              </g>
-            </motion.svg>
+              <img
+                src="/meface.png"
+                alt="Suhan Shrestha"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
 
           {/* Title Text */}
           <div className="relative z-10 overflow-hidden">
             <h1 className="font-display leading-[0.85] tracking-tight">
               <span className="hero-title-line block text-[15vw] md:text-[12vw] lg:text-[10vw] text-foreground">
-                MILES
+                SUHAN
               </span>
               <span className="hero-title-line block text-[15vw] md:text-[12vw] lg:text-[10vw] text-transparent" style={{ WebkitTextStroke: "2px #e11d48" }}>
-                MORALES
+                SHRESTHA
               </span>
             </h1>
           </div>

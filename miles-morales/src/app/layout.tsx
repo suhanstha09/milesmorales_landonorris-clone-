@@ -22,11 +22,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Miles Morales | Spider-Man — Earth-1610",
+  title: "Kid Arachnid | Spider-Man — Earth-1610",
   description:
-    "The official portfolio of Miles Morales — Brooklyn's one and only Spider-Man. Built with cinematic motion.",
+    "The official portfolio of Kid Arachnid — Brooklyn's one and only Spider-Man. Built with cinematic motion.",
   keywords: [
-    "Miles Morales",
+    "Kid Arachnid",
     "Spider-Man",
     "Spider-Verse",
     "Earth-1610",

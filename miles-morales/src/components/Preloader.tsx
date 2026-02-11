@@ -91,10 +91,10 @@ export default function Preloader() {
             className="text-center"
           >
             <p className="font-display text-6xl tracking-wider text-foreground mb-2">
-              MILES
+              SUHAN
             </p>
             <p className="font-display text-2xl tracking-[0.3em] text-spider-red">
-              MORALES
+              SHRESTHA
             </p>
           </motion.div>
 
