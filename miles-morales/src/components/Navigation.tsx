@@ -37,10 +37,12 @@ export default function Navigation() {
     <>
       {/* Fixed Nav Bar */}
       <motion.header
-        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
-          scrolled
-            ? "bg-background/80 backdrop-blur-xl border-b border-border"
-            : "bg-transparent"
+        className={`fixed top-0 left-0 w-full z-[110] transition-all duration-500 ${
+          isOpen
+            ? "bg-transparent"
+            : scrolled
+              ? "bg-background/80 backdrop-blur-xl border-b border-border"
+              : "bg-transparent"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
