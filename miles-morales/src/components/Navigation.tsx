@@ -52,7 +52,7 @@ export default function Navigation() {
           {/* Logo */}
           <a
             href="#"
-            className="relative z-[110] flex items-center gap-3 group"
+            className={`relative z-[110] flex items-center gap-3 group transition-opacity duration-300 ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
           >
             <div className="w-14 h-14 rounded-full border-2 border-spider-red flex items-center justify-center group-hover:bg-spider-red transition-colors duration-300 overflow-hidden">
               <img src="/logomm.png" alt="Logo" className="w-14 h-14 object-contain" />
@@ -63,7 +63,7 @@ export default function Navigation() {
           </a>
 
           {/* Desktop Links */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className={`hidden lg:flex items-center gap-8 transition-opacity duration-300 ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
             {navLinks.map((link) => (
               <a
                 key={link.href}
